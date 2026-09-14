@@ -1,0 +1,346 @@
+﻿\documentclass[12pt,a4paper]{article}
+
+% --- PAQUETES DE IDIOMA Y FORMATO ---
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{geometry}
+\geometry{top=2.5cm, bottom=2.5cm, left=3cm, right=2.5cm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{listings}
+
+% --- COLORES INSTITUCIONALES UNSAAC ---
+\definecolor{unsaacBlue}{RGB}{0, 51, 102}
+\definecolor{unsaacGold}{RGB}{204, 153, 0}
+\definecolor{codeBg}{RGB}{245, 247, 250}
+\definecolor{codeBorder}{RGB}{218, 224, 233}
+\definecolor{darkgray}{RGB}{60, 60, 60}
+
+% --- CONFIGURACIÓN DE LISTINGS PARA CÓDIGO DART ---
+\lstdefinelanguage{Dart}{
+  morekeywords={abstract,as,assert,async,await,break,case,catch,class,const,continue,default,deferred,do,dynamic,else,enum,export,extends,extension,external,factory,false,final,finally,for,Function,get,hide,if,implements,import,in,interface,is,late,library,mixin,new,null,of,on,operator,part,rethrow,return,set,show,static,super,switch,sync,this,throw,true,try,typedef,var,void,while,with,yield},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{
+  language=Dart,
+  backgroundcolor=\color{codeBg},
+  basicstyle=\ttfamily\footnotesize\color{darkgray},
+  keywordstyle=\bfseries\color{unsaacBlue},
+  commentstyle=\itshape\color{gray},
+  stringstyle=\color{unsaacGold!80!black},
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{codeBorder},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=8pt,
+  showstringspaces=false,
+  tabsize=2
+}
+
+% --- ENCABEZADOS Y PIES DE PÁGINA ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{gray}UNSAAC - Desarrollo de Aplicaciones Móviles (IF616AIN)}
+\fancyhead[R]{\small\color{gray}Informe N° 01}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=unsaacBlue,
+    citecolor=unsaacBlue,
+    urlcolor=unsaacBlue
+}
+
+\begin{document}
+
+% --- PORTADA INSTITUCIONAL ---
+\begin{titlepage}
+    \centering
+    \vfill
+    {\large\bfseries UNIVERSIDAD NACIONAL DE SAN ANTONIO ABAD DEL CUSCO} \\[0.4cm]
+    {\large FACULTAD DE INGENIERÍA ELÉCTRICA, ELECTRÓNICA, INFORMÁTICA Y MECÁNICA} \\[0.4cm]
+    {\large ESCUELA PROFESIONAL DE INGENIERÍA INFORMÁTICA Y DE SISTEMAS} \\[1.2cm]
+    
+    \rule{0.4\textwidth}{0.6pt} \\[0.3cm]
+    {\bfseries [ LOGO INSTITUCIONAL UNSAAC ]} \\[0.3cm]
+    \rule{0.4\textwidth}{0.6pt} \\[1.2cm]
+    
+    {\Large\bfseries ASIGNATURA: DESARROLLO DE APLICACIONES MÓVILES} \\[0.3cm]
+    {\large\bfseries CÓDIGO: IF616AIN \quad | \quad SEMESTRE: 2026-1} \\[0.8cm]
+    
+    {\Large\bfseries INFORME DE LABORATORIO N° 01} \\[0.4cm]
+    {\large\bfseries PRODUCTO 1: INSTALACIÓN DEL ENTORNO DE DESARROLLO Y APLICACIÓN BÁSICA ``HOLA MUNDO MÓVIL''} \\[1.2cm]
+    
+    \textbf{DOCENTE RESPONSABLE:} \\
+    Ing. CCACYAHUILLCA-BEJAR-HANS HARLEY \\[0.8cm]
+    
+    \textbf{ESTUDIANTE / DESARROLLADOR:} \\
+    SUPA CUSIPAUCAR, Yeferson \quad (Código: 220553) \\[1.2cm]
+    
+    {\large Cusco - Perú} \\
+    {\large 2026}
+    \vfill
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+% --- 1. INTRODUCCIÓN ---
+\section{Introducción y Objetivos}
+
+\subsection{Contexto de la Asignatura}
+La asignatura \textbf{Desarrollo de Aplicaciones Móviles (IF616AIN)} de la Universidad Nacional de San Antonio Abad del Cusco (UNSAAC) tiene por propósito brindar los fundamentos teóricos y prácticos indispensables para la creación de software móvil moderno, robusto y eficiente. 
+
+De acuerdo con la Primera Unidad Didáctica (\textit{Fundamentos del desarrollo móvil}), el primer hito de aprendizaje corresponde a la instalación de las herramientas del ecosistema de desarrollo y la construcción del \textbf{Producto 1: Aplicación básica ``Hola Mundo móvil''}.
+
+\subsection{Objetivos de la Práctica}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Objetivo General:} Configurar de forma integral el entorno de desarrollo móvil y construir una primera aplicación móvil en Flutter y Dart que evidencie el ciclo de vida y la reactividad de componentes.
+    \item \textbf{Objetivos Específicos:}
+    \begin{enumerate}
+        \item Instalar y configurar el SDK de Flutter (canal stable) junto con el Java Development Kit (JDK 17) y el Android SDK (plataforma 36 y build-tools).
+        \item Integrar el entorno de desarrollo en Visual Studio Code y Android Studio con sus respectivas extensiones y herramientas de depuración.
+        \item Comprender la arquitectura de directorios de un proyecto Flutter y la función de sus archivos esenciales (\texttt{pubspec.yaml}, \texttt{lib/main.dart}, \texttt{android/}).
+        \item Implementar widgets de tipo \texttt{StatelessWidget} y \texttt{StatefulWidget}, aplicando el concepto de reactividad mediante \texttt{setState()}.
+        \item Realizar pruebas automatizadas y ejecutar la aplicación en entornos de prueba y dispositivos móviles reales.
+    \end{enumerate}
+\end{itemize}
+
+% --- 2. FUNDAMENTOS TEÓRICOS ---
+\section{Fundamentos del Desarrollo Móvil}
+
+\subsection{Tipos de Aplicaciones Móviles}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Nativas:} Desarrolladas en los lenguajes oficiales de cada plataforma (Kotlin/Java para Android, Swift para iOS). Ofrecen el máximo rendimiento y acceso a APIs de bajo nivel, pero requieren código duplicado.
+    \item \textbf{Híbridas / Web:} Aplicaciones empaquetadas basadas en tecnologías web (HTML, CSS, JavaScript) dentro de un contenedor WebView. Tienen menor rendimiento al depender de un motor web intermediario.
+    \item \textbf{Multiplataforma Compiladas (Flutter):} Framework de Google que utiliza el lenguaje Dart y compila directamente a código binario de máquina (ARM/x86) utilizando el motor gráfico propio (Impeller / Skia). Permite un rendimiento idéntico al nativo con una única base de código para Android, iOS, Web y Escritorio.
+\end{itemize}
+
+\subsection{Arquitectura y Ciclo de Vida de una Aplicación Flutter}
+En Flutter, todo elemento visual es un \textbf{Widget}. La interfaz de usuario es reactiva: se describe en función del estado actual (\textit{UI = f(state)}).
+\begin{itemize}[leftmargin=*]
+    \item \texttt{StatelessWidget}: Widget inmutable cuya estructura no depende de variables mutables a lo largo del tiempo.
+    \item \texttt{StatefulWidget}: Widget asociado a una clase de estado (\texttt{State}) que persiste en memoria y permite reconstruir la interfaz ante eventos de usuario mediante la invocación de \texttt{setState()}.
+\end{itemize}
+
+% --- 3. CONFIGURACIÓN DEL ENTORNO ---
+\section{Instalación y Configuración del Entorno de Desarrollo}
+
+En concordancia con las herramientas digitales estipuladas en el sílabo, se procedió con la instalación y configuración técnica de los siguientes componentes:
+
+\subsection{Herramientas Instaladas}
+\begin{table}[h!]
+\centering
+\small
+\begin{tabularx}{\textwidth}{lXp{5.5cm}}
+\toprule
+\textbf{Herramienta} & \textbf{Versión Instalada} & \textbf{Ruta / Configuración} \\
+\midrule
+\textbf{Flutter SDK} & 3.47.4 (Canal stable) & \texttt{C:\textbackslash src\textbackslash flutter\textbackslash bin} \\
+\textbf{Dart SDK} & 3.13.3 & Integrado con Flutter \\
+\textbf{Java JDK} & Eclipse Temurin 17.0.20.1 & \texttt{JAVA\_HOME} configurado \\
+\textbf{Android Studio} & Versión Oficial Google 2026.1.4 & Con accesos directos configurados \\
+\textbf{Android SDK} & Plataforma 36, Build-Tools 36.0.0 & \texttt{ANDROID\_HOME} configurado \\
+\textbf{Platform-Tools} & adb 1.0.41 (v37.0.1) & Para depuración en terminal \\
+\textbf{VS Code} & Extensiones Flutter y Dart 3.142.0 & Integrado para Hot Reload \\
+\textbf{Postman} & 12.28.0 & Para consumo de APIs REST \\
+\textbf{Figma Desktop} & 126.9.7 & Para prototipado UI/UX \\
+\textbf{Firebase CLI} & 15.30.1 & Para servicios cloud (Unidad II) \\
+\bottomrule
+\end{tabularx}
+\caption{Resumen de herramientas del entorno de desarrollo móvil.}
+\end{table}
+
+\subsection{Auditoría del Entorno (\texttt{flutter doctor})}
+Para garantizar que todos los componentes se encuentren enlazados sin conflictos, se ejecutó la herramienta de diagnóstico \texttt{flutter doctor -v}, obteniendo un resultado limpio y sin observaciones:
+
+\begin{lstlisting}[language=bash, numbers=none]
+[√] Flutter (Channel stable, 3.47.4, on Microsoft Windows, locale es-PE)
+[√] Windows Version (Windows 11 or higher)
+[√] Android toolchain - develop for Android devices (Android SDK version 36.0.0)
+    • Android SDK at C:\Users\yefer\AppData\Local\Android\Sdk
+    • Platform android-36, build-tools 36.0.0
+    • ANDROID_HOME = C:\Users\yefer\AppData\Local\Android\Sdk
+    • All Android licenses accepted.
+[√] Chrome - develop for the web
+[√] Visual Studio - develop Windows apps (Visual Studio Community 2022)
+[√] Connected device (3 available)
+[√] Network resources
+
+• No issues found!
+\end{lstlisting}
+
+% --- 4. ESTRUCTURA Y DESARROLLO ---
+\section{Desarrollo del Producto 1: Hola Mundo Móvil}
+
+\subsection{Estructura de Carpetas del Proyecto}
+El proyecto generado mediante \texttt{flutter create} organiza su código de acuerdo con el estándar de la industria:
+\begin{itemize}[leftmargin=*]
+    \item \texttt{lib/}: Directorio principal donde reside el código fuente en Dart.
+    \item \texttt{lib/main.dart}: Archivo de entrada ejecutable de la aplicación.
+    \item \texttt{pubspec.yaml}: Archivo de manifiesto donde se declaran las dependencias externas, versiones del SDK, tipografías y recursos multimedia.
+    \item \texttt{android/}: Contenedor del proyecto nativo Android (Gradle, configuración de paquete \texttt{pe.edu.unsaac.hola\_mundo}, permisos en \texttt{AndroidManifest.xml}).
+    \item \texttt{test/}: Módulo de pruebas de regresión, integración y pruebas de widgets.
+\end{itemize}
+
+\subsection{Implementación de la Aplicación (\texttt{lib/main.dart})}
+A continuación se presenta el código implementado, el cual contextualiza la información de la UNSAAC, la asignatura y demuestra la reactividad mediante un carrusel dinámico de mensajes y contador interactivo:
+
+\begin{lstlisting}
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const UnsaacMobileApp());
+}
+
+/// Widget raiz inmutable: define el tema visual Material 3
+class UnsaacMobileApp extends StatelessWidget {
+  const UnsaacMobileApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'UNSAAC - Desarrollo Movil',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF003366), // Azul institucional
+          brightness: Brightness.light,
+        ),
+      ),
+      home: const HolaMundoScreen(),
+    );
+  }
+}
+
+/// Pantalla principal reactiva (StatefulWidget)
+class HolaMundoScreen extends StatefulWidget {
+  const HolaMundoScreen({super.key});
+
+  @override
+  State<HolaMundoScreen> createState() => _HolaMundoScreenState();
+}
+
+class _HolaMundoScreenState extends State<HolaMundoScreen> {
+  int _contadorSaludos = 0;
+  final List<String> _mensajes = [
+    'Hola Mundo movil! 📱',
+    'Bienvenido a Desarrollo de Aplicaciones Moviles',
+    'UNSAAC - Ingenieria Informatica y de Sistemas',
+    'Construido con Flutter y Dart en tiempo record 🚀',
+  ];
+  int _indiceMensaje = 0;
+
+  void _cambiarMensaje() {
+    // Notifica al framework que el estado cambio y redibuja la interfaz
+    setState(() {
+      _contadorSaludos++;
+      _indiceMensaje = (_indiceMensaje + 1) % _mensajes.length;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('IF616AIN - UNSAAC', style: TextStyle(fontWeight: FontWeight.bold)),
+        centerTitle: true,
+        backgroundColor: theme.colorScheme.primaryContainer,
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Card(
+                elevation: 4,
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    children: [
+                      Icon(Icons.smartphone_rounded, size: 72, color: theme.colorScheme.primary),
+                      const SizedBox(height: 16),
+                      Text(
+                        _mensajes[_indiceMensaje],
+                        textAlign: TextAlign.center,
+                        style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 12),
+                      const Text('Producto 1: Aplicacion basica "Hola Mundo movil"'),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              FilledButton.icon(
+                onPressed: _cambiarMensaje,
+                icon: const Icon(Icons.touch_app_rounded),
+                label: const Text('Presioname para cambiar el saludo'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+\end{lstlisting}
+
+% --- 5. PRUEBAS Y VALIDACIÓN ---
+\section{Pruebas Automatizadas y Validación}
+
+\subsection{Pruebas de Widgets (\texttt{test/widget\_test.dart})}
+Se implementó una prueba automatizada para verificar el correcto renderizado inicial del saludo institucional y la respuesta del estado ante la pulsación del botón:
+
+\begin{lstlisting}[language=bash, numbers=none]
+$ flutter test
+00:00 +0: loading test/widget_test.dart
+00:00 +0: Prueba de humo para UnsaacMobileApp
+00:00 +1: All tests passed!
+\end{lstlisting}
+
+\subsection{Análisis Estático de Código (\texttt{flutter analyze})}
+Se ejecutó el analizador estático de Dart para garantizar el cumplimiento de las buenas prácticas y guías de estilo oficiales:
+\begin{lstlisting}[language=bash, numbers=none]
+$ flutter analyze
+Analyzing Desarrollo_SoftwareII...
+No issues found! (ran in 7.5s)
+\end{lstlisting}
+
+% --- 6. CONCLUSIONES ---
+\section{Conclusiones}
+\begin{itemize}[leftmargin=*]
+    \item Se completó con éxito la instalación y configuración del entorno de desarrollo móvil para la asignatura \textbf{IF616AIN}, validando la total interoperabilidad entre Flutter 3.47, Java 17, Android Studio y el Android SDK 36.
+    \item La aplicación desarrollada cumple con los requerimientos del \textbf{Producto 1}, permitiendo comprobar el flujo de compilación, la estructura modular de directorios y la reactividad de componentes mediante widgets \texttt{Stateless} y \texttt{Stateful}.
+    \item El mecanismo de \textit{Hot Reload} de Flutter optimiza sustancialmente los tiempos de desarrollo de interfaz frente al ciclo tradicional de compilación nativa en Android.
+\end{itemize}
+
+% --- 7. REFERENCIAS ---
+\section{Referencias Bibliográficas}
+\begin{itemize}[leftmargin=*]
+    \item Martín, F. (2022). \textit{Desarrollo de aplicaciones móviles con Flutter y Dart}. Anaya Multimedia.
+    \item Deitel, P., \& Deitel, H. (2021). \textit{Android for Programmers: An App-Driven Approach}. Prentice Hall.
+    \item Documentación Oficial de Flutter. \url{https://flutter.dev/docs}
+    \item Google Developers Portal. \url{https://developer.android.com}
+\end{itemize}
+
+\end{document}
