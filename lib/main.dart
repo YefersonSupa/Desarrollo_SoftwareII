@@ -35,16 +35,16 @@ class HolaMundoScreen extends StatefulWidget {
 }
 
 class _HolaMundoScreenState extends State<HolaMundoScreen> {
-  // Estado local de la pantalla
   int _contadorSaludos = 0;
-  final List<String> _mensajes = [
-    '¡Hola Mundo móvil! 📱',
+  int _indiceMensaje = 0;
+
+  // Al definirlo como getter o estático, Hot Reload lo actualiza instantáneamente con Ctrl+S
+  List<String> get _mensajes => [
+    '¡Hola mundo!📱',
     'Bienvenido a Desarrollo de Aplicaciones Móviles',
     'UNSAAC - Ingeniería Informática y de Sistemas',
     'Construido con Flutter y Dart en tiempo récord 🚀',
   ];
-
-  int _indiceMensaje = 0;
 
   void _cambiarMensaje() {
     // setState notifica a Flutter que el estado cambió y redibuja la UI

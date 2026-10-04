@@ -14,7 +14,7 @@ void main() {
     await tester.pumpWidget(const UnsaacMobileApp());
 
     // Verificar que el saludo inicial está presente
-    expect(find.text('¡Hola Mundo móvil! 📱'), findsOneWidget);
+    expect(find.text('¡Hola mundo!📱'), findsOneWidget);
 
     // Asegurar que el botón sea visible y simular el toque
     final boton = find.text('Presióname para cambiar el saludo');
