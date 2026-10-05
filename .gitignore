@@ -29,13 +29,13 @@ migrate_working_dir/
 /coverage/
 
 # Platform folders ignored (Práctica 02: repositorio exclusivo de Dart)
-android/
-ios/
-linux/
-macos/
-web/
-windows/
-lib/
+/android/
+/ios/
+/linux/
+/macos/
+/web/
+/windows/
+/lib/
 
 # Agent IDE files
 .agents/
