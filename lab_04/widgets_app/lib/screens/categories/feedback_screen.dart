@@ -1,6 +1,9 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../data/widgets_data.dart';
 import '../../widgets/widget_demo_card.dart';
+
+enum _ProgressDisplayMode { continuous, simulated, manual }
 
 class FeedbackScreen extends StatefulWidget {
   const FeedbackScreen({super.key});
@@ -11,8 +14,11 @@ class FeedbackScreen extends StatefulWidget {
 
 class _FeedbackScreenState extends State<FeedbackScreen> {
   // Estados ProgressIndicator
-  bool _isDeterminate = false;
-  double _progressValue = 0.65;
+  _ProgressDisplayMode _progressMode = _ProgressDisplayMode.continuous;
+  double _manualProgress = 0.65;
+  double _simulatedProgress = 0.0;
+  bool _isSimulating = false;
+  Timer? _simulationTimer;
 
   // Estados AlertDialog
   String _dialogDecision = 'Ninguna todavía';
@@ -21,6 +27,51 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   // Estados Chip & FilterChip
   final Set<String> _selectedChips = {'Flutter', 'Dart'};
   final List<String> _removableTags = ['Widget', 'State', 'Context', 'Hot Reload'];
+
+  @override
+  void dispose() {
+    _simulationTimer?.cancel();
+    super.dispose();
+  }
+
+  void _startSimulation() {
+    _simulationTimer?.cancel();
+    setState(() {
+      _simulatedProgress = 0.0;
+      _isSimulating = true;
+    });
+    _simulationTimer = Timer.periodic(const Duration(milliseconds: 60), (timer) {
+      if (!mounted) {
+        timer.cancel();
+        return;
+      }
+      setState(() {
+        _simulatedProgress += 0.02;
+        if (_simulatedProgress >= 1.0) {
+          _simulatedProgress = 1.0;
+          _isSimulating = false;
+          timer.cancel();
+        }
+      });
+    });
+  }
+
+  void _stopSimulation() {
+    _simulationTimer?.cancel();
+    _isSimulating = false;
+  }
+
+  String _getSimulationMessage() {
+    if (_simulatedProgress >= 1.0) {
+      return '¡Carga completada con éxito al 100%! ✓';
+    } else if (_simulatedProgress >= 0.70) {
+      return 'Renderizando e inflando widgets... (${(_simulatedProgress * 100).toInt()}%)';
+    } else if (_simulatedProgress >= 0.35) {
+      return 'Descargando datos del servidor... (${(_simulatedProgress * 100).toInt()}%)';
+    } else {
+      return 'Iniciando conexión y recursos... (${(_simulatedProgress * 100).toInt()}%)';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,24 +160,67 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
           // 2. Progress Indicators
           WidgetDemoCard(
             info: widgets.firstWhere((w) => w.id == 'progress_indicators'),
-            controls: Row(
+            controls: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FilterChip(
-                  label: Text(_isDeterminate ? 'Modo: Determinado (exacto)' : 'Modo: Indeterminado (animación)'),
-                  selected: _isDeterminate,
-                  onSelected: (v) => setState(() => _isDeterminate = v),
-                ),
-                if (_isDeterminate) ...[
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Slider(
-                      value: _progressValue,
-                      min: 0.0,
-                      max: 1.0,
-                      onChanged: (v) => setState(() => _progressValue = v),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 6,
+                  children: [
+                    ChoiceChip(
+                      avatar: const Icon(Icons.sync, size: 16),
+                      label: const Text('Animación Continua'),
+                      selected: _progressMode == _ProgressDisplayMode.continuous,
+                      onSelected: (selected) {
+                        if (selected) {
+                          _stopSimulation();
+                          setState(() => _progressMode = _ProgressDisplayMode.continuous);
+                        }
+                      },
                     ),
+                    ChoiceChip(
+                      avatar: const Icon(Icons.play_circle_outline, size: 16),
+                      label: const Text('Simular Carga (0-100%)'),
+                      selected: _progressMode == _ProgressDisplayMode.simulated,
+                      onSelected: (selected) {
+                        if (selected) {
+                          setState(() => _progressMode = _ProgressDisplayMode.simulated);
+                          _startSimulation();
+                        }
+                      },
+                    ),
+                    ChoiceChip(
+                      avatar: const Icon(Icons.tune, size: 16),
+                      label: const Text('Control Manual'),
+                      selected: _progressMode == _ProgressDisplayMode.manual,
+                      onSelected: (selected) {
+                        if (selected) {
+                          _stopSimulation();
+                          setState(() => _progressMode = _ProgressDisplayMode.manual);
+                        }
+                      },
+                    ),
+                  ],
+                ),
+                if (_progressMode == _ProgressDisplayMode.manual) ...[
+                  const SizedBox(height: 6),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Slider(
+                          value: _manualProgress,
+                          min: 0.0,
+                          max: 1.0,
+                          activeColor: const Color(0xFFE53935),
+                          onChanged: (v) => setState(() => _manualProgress = v),
+                        ),
+                      ),
+                      Text(
+                        '${(_manualProgress * 100).toInt()}%',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
-                  Text('${(_progressValue * 100).toInt()}%'),
                 ],
               ],
             ),
@@ -134,29 +228,131 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Column(
                 children: [
+                  // Estado actual o botón de reintento
+                  if (_progressMode == _ProgressDisplayMode.continuous) ...[
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: Colors.red.shade50,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: Colors.red.shade200),
+                      ),
+                      child: const Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.autorenew, size: 16, color: Color(0xFFE53935)),
+                          SizedBox(width: 6),
+                          Text(
+                            'Animación de carga en curso (modo indeterminado)',
+                            style: TextStyle(
+                              color: Color(0xFFE53935),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                  ] else if (_progressMode == _ProgressDisplayMode.simulated) ...[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton.icon(
+                          onPressed: _isSimulating ? null : _startSimulation,
+                          icon: Icon(_isSimulating ? Icons.hourglass_top : Icons.replay),
+                          label: Text(_isSimulating ? 'Cargando datos...' : 'Reiniciar Animación'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFFE53935),
+                            foregroundColor: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      _getSimulationMessage(),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: _simulatedProgress >= 1.0 ? Colors.green.shade800 : Colors.red.shade900,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                  ],
+
+                  // Indicador Circular animado
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      CircularProgressIndicator(
-                        value: _isDeterminate ? _progressValue : null,
-                        color: const Color(0xFFE53935),
-                        strokeWidth: 4,
+                      SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: CircularProgressIndicator(
+                          value: _progressMode == _ProgressDisplayMode.continuous
+                              ? null // Animación giratoria continua infinita
+                              : _progressMode == _ProgressDisplayMode.simulated
+                                  ? _simulatedProgress
+                                  : _manualProgress,
+                          color: const Color(0xFFE53935),
+                          backgroundColor: Colors.red.shade100,
+                          strokeWidth: 4.5,
+                        ),
                       ),
-                      Text(
-                        _isDeterminate
-                            ? 'Progreso circular: ${(_progressValue * 100).toInt()}%'
-                            : 'Cargando recursos...',
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'CircularProgressIndicator',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            _progressMode == _ProgressDisplayMode.continuous
+                                ? 'Animación giratoria activa (value: null)'
+                                : 'Progreso actual: ${((_progressMode == _ProgressDisplayMode.simulated ? _simulatedProgress : _manualProgress) * 100).toInt()}%',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey.shade700,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
-                  LinearProgressIndicator(
-                    value: _isDeterminate ? _progressValue : null,
-                    color: const Color(0xFFE53935),
-                    backgroundColor: Colors.red.shade100,
-                    minHeight: 8,
-                    borderRadius: BorderRadius.circular(4),
+                  const SizedBox(height: 24),
+
+                  // Indicador Lineal animado
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'LinearProgressIndicator',
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                          ),
+                          if (_progressMode != _ProgressDisplayMode.continuous)
+                            Text(
+                              '${((_progressMode == _ProgressDisplayMode.simulated ? _simulatedProgress : _manualProgress) * 100).toInt()}%',
+                              style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFFE53935)),
+                            ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(6),
+                        child: LinearProgressIndicator(
+                          value: _progressMode == _ProgressDisplayMode.continuous
+                              ? null // Animación de barrido horizontal continua
+                              : _progressMode == _ProgressDisplayMode.simulated
+                                  ? _simulatedProgress
+                                  : _manualProgress,
+                          color: const Color(0xFFE53935),
+                          backgroundColor: Colors.red.shade100,
+                          minHeight: 10,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

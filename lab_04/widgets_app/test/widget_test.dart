@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:widgets_app/main.dart';
 import 'package:widgets_app/data/widgets_data.dart';
+import 'package:widgets_app/screens/categories/feedback_screen.dart';
 
 void main() {
   test('Verificar integridad del dataset de 25 widgets', () {
@@ -84,5 +85,15 @@ void main() {
 
     // Ahora el tooltip debe indicar cambio a modo claro
     expect(find.byTooltip('Cambiar a modo claro'), findsOneWidget);
+  });
+
+  testWidgets('Verificar animación de carga en ProgressIndicators (FeedbackScreen)', (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(home: FeedbackScreen()));
+    await tester.pump();
+
+    // Verificar presencia de ambos indicadores con animación
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    expect(find.byType(LinearProgressIndicator), findsOneWidget);
+    expect(find.textContaining('Animación de carga'), findsWidgets);
   });
 }

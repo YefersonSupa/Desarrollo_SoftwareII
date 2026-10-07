@@ -353,6 +353,18 @@ ScaffoldMessenger.of(context).showSnackBar(
     ),
   ),
 );
+\begin{lstlisting}[caption={Indicadores de progreso con animación continua y simulación},label={lst:progress}]
+// Animacion continua indeterminada (giratoria y barrido infinito)
+CircularProgressIndicator(value: null, color: Colors.red);
+LinearProgressIndicator(value: null, color: Colors.red);
+
+// Carga animada simulada reactiva (0.0 -> 1.0)
+Timer.periodic(const Duration(milliseconds: 60), (timer) {
+  setState(() {
+    _simulatedProgress += 0.02;
+    if (_simulatedProgress >= 1.0) timer.cancel();
+  });
+});
 \end{lstlisting}
 
 % ==============================================================================
@@ -393,12 +405,11 @@ void main() {
     expect(find.textContaining('UNSAAC'), findsWidgets);
   });
 
-  testWidgets('Busqueda reactiva de widgets por texto', (tester) async {
-    await tester.pumpWidget(const WidgetsGuideApp());
-    await tester.pumpAndSettle();
-    await tester.enterText(find.byType(TextField), 'Container');
-    await tester.pumpAndSettle();
-    expect(find.text('Container'), findsWidgets);
+  testWidgets('Verificar animacion de carga en ProgressIndicators (FeedbackScreen)', (tester) async {
+    await tester.pumpWidget(const MaterialApp(home: FeedbackScreen()));
+    await tester.pump();
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    expect(find.byType(LinearProgressIndicator), findsOneWidget);
   });
 }
 \end{lstlisting}
@@ -418,6 +429,8 @@ void main() {
 4. Navegación en Pila & Valida la transición hacia \texttt{LayoutScreen} y retorno seguro al Home. & \textbf{PASÓ (0 errores)} \\
 \hline
 5. Alternancia de Tema & Comprueba el cambio reactivo entre modo claro y modo oscuro. & \textbf{PASÓ (0 errores)} \\
+\hline
+6. Animación de Carga & Valida la presencia y animación de los ProgressIndicators en FeedbackScreen. & \textbf{PASÓ (0 errores)} \\
 \hline
 \end{tabularx}
 \caption{Resultados de la ejecución de \texttt{flutter test}.}
