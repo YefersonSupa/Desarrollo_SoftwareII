@@ -442,74 +442,55 @@ void main() {
 % ==============================================================================
 \section{Evidencias de Ejecución en Dispositivo Móvil Físico}
 
-La aplicación interactiva \texttt{widgets\_app} fue desplegada y validada en un dispositivo físico \textbf{Motorola Edge 60} con sistema operativo \textbf{Android 16 (API 36)}. A continuación, se presentan las capturas de pantalla obtenidas durante la ejecución de las pruebas funcionales:
+La aplicación interactiva \texttt{widgets\_app} fue desplegada y validada en un dispositivo físico \textbf{Motorola Edge 60} con sistema operativo \textbf{Android 16 (API 36)}. A continuación, se presentan las capturas de pantalla obtenidas durante la ejecución de las pruebas funcionales para cada una de las 5 categorías evaluadas:
 
-\subsection{Entorno Global y Categoría Layout}
-En la Figura~\ref{fig:modo_oscuro} se aprecia la interfaz principal operando en modo oscuro con Material 3, mostrando el banner institucional de la UNSAAC, las métricas de widgets y la barra de búsqueda reactiva. En la Figura~\ref{fig:container} se evidencia la manipulación dinámica del widget \texttt{Container}, donde los controles deslizantes permiten alterar el ancho, alto y radio de borde en tiempo real.
+\subsection{Categorías 1 y 2: Layout y Display}
+En la Figura~\ref{fig:layout} se evidencia la ejecución de los widgets de la categoría \textit{Layout}, demostrando la maquetación espacial mediante \texttt{Container}, \texttt{Row}, \texttt{Column}, \texttt{Stack}, \texttt{Expanded} y separadores dimensionales. En la Figura~\ref{fig:display} se valida la renderización de los componentes de la categoría \textit{Display}, incluyendo tipografía con estilos (\texttt{Text}), carga multimedia (\texttt{Image}), tarjetas elevadas (\texttt{Card}), avatares circulares (\texttt{CircleAvatar}) y colecciones estructuradas (\texttt{ListView} y \texttt{GridView}).
 
 \begin{figure}[htbp]
     \centering
     \begin{minipage}{0.48\textwidth}
         \centering
-        \includegraphics[width=0.88\linewidth]{imagenes/modo_oscuro.png}
-        \caption{Pantalla de inicio en Modo Oscuro (Material 3).}
-        \label{fig:modo_oscuro}
+        \includegraphics[width=0.88\linewidth]{imagenes/layout.png}
+        \caption{Categoría Layout en ejecución móvil.}
+        \label{fig:layout}
     \end{minipage}\hfill
     \begin{minipage}{0.48\textwidth}
         \centering
-        \includegraphics[width=0.88\linewidth]{imagenes/container.png}
-        \caption{Widget Container: Controles de tamaño y radio.}
-        \label{fig:container}
+        \includegraphics[width=0.88\linewidth]{imagenes/display.png}
+        \caption{Categoría Display en ejecución móvil.}
+        \label{fig:display}
     \end{minipage}
 \end{figure}
 
-\subsection{Categoría Display: Presentación de Texto e Imágenes}
-En la Figura~\ref{fig:text} se visualiza la prueba interactiva del widget \texttt{Text}, demostrando el ajuste en tiempo real del tamaño de fuente en puntos tipográficos (\textit{sp}), negrita y el truncamiento elíptico (\texttt{TextOverflow.ellipsis}). En la Figura~\ref{fig:image} se valida la renderización de imágenes remotas mediante \texttt{Image.network} y el selector de modo de ajuste (\texttt{BoxFit.cover}, \texttt{contain}, \texttt{fill}).
+\subsection{Categorías 3 y 4: Input y Navegación}
+En la Figura~\ref{fig:input} se constata la captura de entrada de usuario mediante los controles interactivos de la categoría \textit{Input}: botones primarios (\texttt{ElevatedButton}), campos editables (\texttt{TextField}), controles booleanos (\texttt{Switch} y \texttt{Checkbox}), menú desplegable (\texttt{DropdownButton}) y control de rango (\texttt{Slider}). En la Figura~\ref{fig:navegacion} se observa la orquestación del flujo de navegación (\textit{Navegación}) mediante la barra superior (\texttt{AppBar}), la barra inferior de destinos (\texttt{BottomNavigationBar}), pestañas sincronizadas (\texttt{TabBar/TabBarView}) y la pila de rutas (\texttt{Navigator}).
 
 \begin{figure}[htbp]
     \centering
     \begin{minipage}{0.48\textwidth}
         \centering
-        \includegraphics[width=0.88\linewidth]{imagenes/text.png}
-        \caption{Widget Text: Ajuste tipográfico y truncamiento.}
-        \label{fig:text}
+        \includegraphics[width=0.88\linewidth]{imagenes/input.jpeg}
+        \caption{Categoría Input en ejecución móvil.}
+        \label{fig:input}
     \end{minipage}\hfill
     \begin{minipage}{0.48\textwidth}
         \centering
-        \includegraphics[width=0.88\linewidth]{imagenes/image.png}
-        \caption{Widget Image: Ajuste de recorte y escala con BoxFit.}
-        \label{fig:image}
+        \includegraphics[width=0.88\linewidth]{imagenes/navegacion.png}
+        \caption{Categoría Navegación en ejecución móvil.}
+        \label{fig:navegacion}
     \end{minipage}
 \end{figure}
 
-\subsection{Categorías Input y Navegación}
-La Figura~\ref{fig:switch_checkbox} evidencia los controles booleanos \texttt{Switch} y \texttt{Checkbox}, reflejando reactividad instantánea al modificar estados del sistema. En la Figura~\ref{fig:tabbar} se observa la sincronización perfecta entre las pestañas del \texttt{TabBar} y la vista paginada del \texttt{TabBarView}.
+\subsection{Categoría 5: Feedback y Notificaciones del Sistema}
+En la Figura~\ref{fig:feedback} se exhiben los componentes de la categoría \textit{Feedback}: emisión de notificaciones flotantes (\texttt{SnackBar}), diálogos modales de decisión (\texttt{AlertDialog}), etiquetas con borrado y selección contextual (\texttt{Chip/FilterChip}), e indicadores circulares y lineales con animación de carga continua y simulación en tiempo real (\texttt{CircularProgressIndicator} y \texttt{LinearProgressIndicator}).
 
 \begin{figure}[htbp]
     \centering
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=0.88\linewidth]{imagenes/switch_checkbox.png}
-        \caption{Widgets Switch y Checkbox: Captura booleana.}
-        \label{fig:switch_checkbox}
-    \end{minipage}\hfill
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=0.88\linewidth]{imagenes/tabbar_tabbarviwe.png}
-        \caption{TabBar y TabBarView: Pestañas sincronizadas.}
-        \label{fig:tabbar}
-    \end{minipage}
-\end{figure}
-
-\subsection{Categoría Feedback: Chips y Etiquetas Interactivas}
-La Figura~\ref{fig:chip} exhibe la demostración de los widgets \texttt{Chip} y \texttt{FilterChip}. Se verifica la capacidad de selección múltiple sobre las tecnologías del laboratorio, así como la funcionalidad de eliminación reactiva mediante el callback \texttt{onDeleted}.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.48\linewidth]{imagenes/chip_fliterchip.png}
-    \caption{Widgets Chip y FilterChip: Selección y borrado contextual.}
-    \label{fig:chip}
-    \vspace{0.4cm}
+    \includegraphics[width=0.48\linewidth]{imagenes/feedback.png}
+    \caption{Categoría Feedback y Notificaciones en ejecución móvil.}
+    \label{fig:feedback}
+    \vspace{0.3cm}
 \end{figure}
 
 % ==============================================================================
