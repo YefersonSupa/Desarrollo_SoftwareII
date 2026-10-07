@@ -261,6 +261,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
           // Si el usuario está buscando o filtrando, mostrar lista de resultados directos
           if (_searchQuery.isNotEmpty || _selectedCategoryFilter != null) ...[
+            if (_selectedCategoryFilter != null) ...[
+              ElevatedButton.icon(
+                onPressed: () => _navigateToCategory(_selectedCategoryFilter!),
+                icon: Icon(_selectedCategoryFilter!.icon),
+                label: Text('Abrir Pantalla Completa de ${_selectedCategoryFilter!.displayName}'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: _selectedCategoryFilter!.color,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                ),
+              ),
+              const SizedBox(height: 12),
+            ],
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
