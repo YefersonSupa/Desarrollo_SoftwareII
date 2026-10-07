@@ -425,7 +425,82 @@ void main() {
 \end{table}
 
 % ==============================================================================
-% 7. DECÁLOGO DE BUENAS PRÁCTICAS EN FLUTTER
+% 7. EVIDENCIAS DE EJECUCIÓN EN DISPOSITIVO MÓVIL
+% ==============================================================================
+\section{Evidencias de Ejecución en Dispositivo Móvil Físico}
+
+La aplicación interactiva \texttt{widgets\_app} fue desplegada y validada en un dispositivo físico \textbf{Motorola Edge 60} con sistema operativo \textbf{Android 16 (API 36)}. A continuación, se presentan las capturas de pantalla obtenidas durante la ejecución de las pruebas funcionales:
+
+\subsection{Entorno Global y Categoría Layout}
+En la Figura~\ref{fig:modo_oscuro} se aprecia la interfaz principal operando en modo oscuro con Material 3, mostrando el banner institucional de la UNSAAC, las métricas de widgets y la barra de búsqueda reactiva. En la Figura~\ref{fig:container} se evidencia la manipulación dinámica del widget \texttt{Container}, donde los controles deslizantes permiten alterar el ancho, alto y radio de borde en tiempo real.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=0.88\linewidth]{imagenes/modo_oscuro.png}
+        \caption{Pantalla de inicio en Modo Oscuro (Material 3).}
+        \label{fig:modo_oscuro}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=0.88\linewidth]{imagenes/container.png}
+        \caption{Widget Container: Controles de tamaño y radio.}
+        \label{fig:container}
+    \end{minipage}
+\end{figure}
+
+\subsection{Categoría Display: Presentación de Texto e Imágenes}
+En la Figura~\ref{fig:text} se visualiza la prueba interactiva del widget \texttt{Text}, demostrando el ajuste en tiempo real del tamaño de fuente en puntos tipográficos (\textit{sp}), negrita y el truncamiento elíptico (\texttt{TextOverflow.ellipsis}). En la Figura~\ref{fig:image} se valida la renderización de imágenes remotas mediante \texttt{Image.network} y el selector de modo de ajuste (\texttt{BoxFit.cover}, \texttt{contain}, \texttt{fill}).
+
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=0.88\linewidth]{imagenes/text.png}
+        \caption{Widget Text: Ajuste tipográfico y truncamiento.}
+        \label{fig:text}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=0.88\linewidth]{imagenes/image.png}
+        \caption{Widget Image: Ajuste de recorte y escala con BoxFit.}
+        \label{fig:image}
+    \end{minipage}
+\end{figure}
+
+\subsection{Categorías Input y Navegación}
+La Figura~\ref{fig:switch_checkbox} evidencia los controles booleanos \texttt{Switch} y \texttt{Checkbox}, reflejando reactividad instantánea al modificar estados del sistema. En la Figura~\ref{fig:tabbar} se observa la sincronización perfecta entre las pestañas del \texttt{TabBar} y la vista paginada del \texttt{TabBarView}.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=0.88\linewidth]{imagenes/switch_checkbox.png}
+        \caption{Widgets Switch y Checkbox: Captura booleana.}
+        \label{fig:switch_checkbox}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=0.88\linewidth]{imagenes/tabbar_tabbarviwe.png}
+        \caption{TabBar y TabBarView: Pestañas sincronizadas.}
+        \label{fig:tabbar}
+    \end{minipage}
+\end{figure}
+
+\subsection{Categoría Feedback: Chips y Etiquetas Interactivas}
+La Figura~\ref{fig:chip} exhibe la demostración de los widgets \texttt{Chip} y \texttt{FilterChip}. Se verifica la capacidad de selección múltiple sobre las tecnologías del laboratorio, así como la funcionalidad de eliminación reactiva mediante el callback \texttt{onDeleted}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.48\linewidth]{imagenes/chip_fliterchip.png}
+    \caption{Widgets Chip y FilterChip: Selección y borrado contextual.}
+    \label{fig:chip}
+    \vspace{0.4cm}
+\end{figure}
+
+% ==============================================================================
+% 8. DECÁLOGO DE BUENAS PRÁCTICAS EN FLUTTER
 % ==============================================================================
 \section{Decálogo de Buenas Prácticas de Ingeniería en Flutter}
 
@@ -443,7 +518,7 @@ void main() {
 \end{enumerate}
 
 % ==============================================================================
-% 8. CONCLUSIONES
+% 9. CONCLUSIONES
 % ==============================================================================
 \section{Conclusiones}
 
@@ -455,7 +530,7 @@ void main() {
 \end{itemize}
 
 % ==============================================================================
-% 9. REFERENCIAS BIBLIOGRÁFICAS
+% 10. REFERENCIAS BIBLIOGRÁFICAS
 % ==============================================================================
 \section{Referencias Bibliográficas}
 
