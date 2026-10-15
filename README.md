@@ -1,124 +1,150 @@
-# Desarrollo de Software II - Práctica 02: Tipos de Datos en Dart
+# Desarrollo de Software II — UNSAAC
 
 **Universidad Nacional de San Antonio Abad del Cusco (UNSAAC)**  
 **Facultad de Ingeniería Eléctrica, Electrónica, Informática y Mecánica**  
 **Escuela Profesional de Ingeniería Informática y de Sistemas**  
 
-* **Asignatura:** Desarrollo de Software II
-* **Semestre Académico:** 2026-I
-* **Docente Responsable:** Ing. CCACYAHUILLCA-BEJAR-HANS HARLEY
-* **Estudiante:** SUPA CUSIPAUCAR, Yeferson (Código: 220553)
-* **Repositorio Oficial:** [https://github.com/YefersonSupa/Desarrollo_SoftwareII](https://github.com/YefersonSupa/Desarrollo_SoftwareII)
-* **Entorno en Línea DartPad:** [https://dartpad.dev/](https://dartpad.dev/)
+* **Asignatura:** Desarrollo de Software II (Código: IF616AIN)
+* **Semestre Académico:** Décimo Semestre
+* **Docente Responsable:** Ing. Hans Harley Ccacyahuillca Bejar
+* **Estudiante:** SUPA CUSIPAUCAR, Yeferson — Código: 220553
+* **Repositorio Oficial:** [GitHub - Desarrollo_SoftwareII](https://github.com/YefersonSupa/Desarrollo_SoftwareII)
 
 ---
 
-## 📌 Descripción de la Práctica 02
+## 📌 Descripción del Repositorio
 
-Resolución completa de los 3 problemas propuestos en la guía oficial de laboratorio ([`lab_02/guia02_dart.pdf`](lab_02/guia02_dart.pdf)), aplicando estructuras de datos nativas de Dart (`List`, `Map`, `Set`), *Null Safety* estricto y análisis de complejidad temporal y espacial (Rúbrica: 20/20).
+Este repositorio contiene la totalidad de los entregables académicos, laboratorios prácticos, aplicaciones móviles desarrolladas en **Flutter & Dart**, suites de pruebas unitarias automatizadas y el proyecto semestral de ingeniería de software.
 
----
-
-## 🚀 1. Ejecución en Línea (DartPad)
-
-Para ejecutar la solución completa en el navegador sin instalar nada:
-1. Ingresa a **[https://dartpad.dev/](https://dartpad.dev/)**.
-2. Copia el código fuente completo del archivo unificado: [`lab_02/solucion_dartpad.dart`](lab_02/solucion_dartpad.dart).
-3. Pégalo en el editor de DartPad y pulsa el botón **Run** (o presiona `Ctrl + Enter`).
-4. Los resultados de los 3 ejercicios se visualizarán ordenadamente en la consola interactiva.
+La arquitectura del repositorio sigue un enfoque **modular e independiente**, donde cada laboratorio constituye un paquete autónomo con su respectivo código fuente, pruebas unitarias verificadas, documentación técnica e informe formal en **LaTeX** con la carátula oficial institucional de la UNSAAC.
 
 ---
 
-## 🧩 2. Ejercicios Desarrollados (`lab_02/`)
-
-### Ejercicio 1: Fusión de Listas Ordenadas (`List` y `ListNode`)
-* **Archivo:** [`lab_02/ejercicio1_list.dart`](lab_02/ejercicio1_list.dart)
-* **Sección Guía:** 3.3 (Merge Two Sorted Lists)
-* **Complejidad:** Tiempo $O(n + m)$ | Espacio $O(1)$
-* **Ejecución local:**
-  ```bash
-  dart run lab_02/ejercicio1_list.dart
-  ```
-
-### Ejercicio 2: Intersección con Multiplicidad (`Map<int, int>`)
-* **Archivo:** [`lab_02/ejercicio2_map.dart`](lab_02/ejercicio2_map.dart)
-* **Sección Guía:** 4.5 (Intersection of Two Arrays II)
-* **Complejidad:** Tiempo $O(n + m)$ | Espacio $O(\min(n, m))$
-* **Ejecución local:**
-  ```bash
-  dart run lab_02/ejercicio2_map.dart
-  ```
-
-### Ejercicio 3: Asignación de Frutas en Cestas (`Set<int>`)
-* **Archivo:** [`lab_02/ejercicio3_set.dart`](lab_02/ejercicio3_set.dart)
-* **Sección Guía:** 5.3 (Fruits into Baskets)
-* **Complejidad:** Tiempo $O(n^2)$ | Espacio $O(n)$
-* **Ejecución local:**
-  ```bash
-  dart run lab_02/ejercicio3_set.dart
-  ```
-
-### Solución Unificada
-* **Archivo:** [`lab_02/solucion_dartpad.dart`](lab_02/solucion_dartpad.dart)
-* **Ejecución local:**
-  ```bash
-  dart run lab_02/solucion_dartpad.dart
-  ```
-
----
-
-## 🧪 3. Pruebas Unitarias Automatizadas (`test/`)
-
-Se implementó una suite completa de pruebas unitarias que valida todos los casos de prueba de la guía y casos de borde:
-
-```bash
-flutter test test/lab_02_test.dart
-```
-
-```text
-00:00 +0: Práctica 02 - Pruebas Unitarias Ejercicio 1: Merge Two Sorted Lists (List) Ejemplo 1: [1,2,4] y [1,3,4] -> [1,1,2,3,4,4]
-00:00 +1: Práctica 02 - Pruebas Unitarias Ejercicio 1: Merge Two Sorted Lists (List) Ejemplo 2: [] y [] -> []
-00:00 +2: Práctica 02 - Pruebas Unitarias Ejercicio 1: Merge Two Sorted Lists (List) Ejemplo 3: [] y [0] -> [0]
-00:00 +3: Práctica 02 - Pruebas Unitarias Ejercicio 1: Merge Two Sorted Lists (List) Solución nativa coincide con listas enlazadas
-00:00 +4: Práctica 02 - Pruebas Unitarias Ejercicio 2: Intersection of Two Arrays II (Map) Ejemplo 1: [1,2,2,1] y [2,2] -> [2,2]
-00:00 +5: Práctica 02 - Pruebas Unitarias Ejercicio 2: Intersection of Two Arrays II (Map) Ejemplo 2: [4,9,5] y [9,4,9,8,4] -> contiene 4 y 9
-00:00 +6: Práctica 02 - Pruebas Unitarias Ejercicio 2: Intersection of Two Arrays II (Map) Sin intersección
-00:00 +7: Práctica 02 - Pruebas Unitarias Ejercicio 3: Fruits into Baskets (Set) Ejemplo 1: frutas=[4,2,5], cestas=[3,5,4] -> 1
-00:00 +8: Práctica 02 - Pruebas Unitarias Ejercicio 3: Fruits into Baskets (Set) Ejemplo 2: frutas=[3,6,1], cestas=[6,4,7] -> 0
-00:00 +9: Práctica 02 - Pruebas Unitarias Ejercicio 3: Fruits into Baskets (Set) Todas las frutas superan capacidades -> n
-00:00 +10: Práctica 02 - Pruebas Unitarias Ejercicio 3: Fruits into Baskets (Set) Caso idéntico: frutas=[5,5], cestas=[5,5] -> 0
-00:00 +11: All tests passed!
-```
-
----
-
-## 📄 4. Informe Académico y Evidencias (`docs/`)
-
-* **Informe en LaTeX:** [`docs/informe_practica02_dart.tex`](docs/informe_practica02_dart.tex) (con carátula oficial institucional de la UNSAAC y rúbrica detallada).
-* **Captura de pantalla de respaldo:** [`docs/captura_dartpad_ejecucion.png`](docs/captura_dartpad_ejecucion.png) (evidencia visual de ejecución en DartPad).
-* **Logotipo institucional:** [`docs/unsaac.jpg`](docs/unsaac.jpg).
-
----
-
-## 📂 5. Estructura Limpia del Repositorio
+## 📂 Estructura General del Proyecto
 
 ```text
 Desarrollo_SoftwareII/
-├── docs/                                  # Informe formal y capturas de respaldo
-│   ├── captura_dartpad_ejecucion.png     # Captura de pantalla de la ejecución en DartPad
-│   ├── informe_practica02_dart.tex       # Documento formal en LaTeX (UNSAAC)
-│   └── unsaac.jpg                         # Logotipo oficial de la UNSAAC
-├── lab_02/                                # Código fuente de la Práctica 02
-│   ├── ejercicio1_list.dart              # Ejercicio 3.3 con List
-│   ├── ejercicio2_map.dart               # Ejercicio 4.5 con Map
-│   ├── ejercicio3_set.dart               # Ejercicio 5.3 con Set
-│   ├── guia02_dart.pdf                   # Guía oficial del laboratorio
-│   └── solucion_dartpad.dart             # Solución completa para DartPad
-├── test/                                  # Pruebas automatizadas
-│   └── lab_02_test.dart                  # Suite de pruebas unitarias (11 tests aprobados)
-├── analysis_options.yaml                  # Reglas de análisis estático de Dart
-├── pubspec.yaml                           # Dependencias para pruebas y SDK
-├── pubspec.lock                           # Lockfile de dependencias
-├── .gitignore                             # Filtro de archivos no requeridos
-└── README.md                              # Documentación principal del repositorio
+├── lab_01/                              # Laboratorio 01: Entorno de Desarrollo y Hola Mundo
+│   ├── hola_mundo/                      # App Flutter móvil y multiplataforma
+│   ├── informe_laboratorio_01.tex       # Informe formal en LaTeX (UNSAAC)
+│   ├── unsaac.jpg                       # Logo institucional para compilación
+│   └── README.md                        # Documentación detallada del Laboratorio 01
+│
+├── lab_02/                              # Laboratorio 02: Tipos de Datos y Colecciones en Dart
+│   ├── ejercicio1_list.dart             # Merge Two Sorted Lists (List y LinkedList)
+│   ├── ejercicio2_map.dart              # Intersection of Two Arrays II (Map)
+│   ├── ejercicio3_set.dart              # Fruits into Baskets (Set)
+│   ├── solucion_dartpad.dart            # Solución unificada para ejecución en navegador
+│   ├── guia02_dart.pdf                  # Guía de laboratorio oficial
+│   ├── test/lab_02_test.dart            # 11 pruebas unitarias automatizadas
+│   ├── informe_practica02_dart.tex      # Informe formal en LaTeX (UNSAAC)
+│   └── README.md                        # Documentación detallada del Laboratorio 02
+│
+├── lab_03/                              # Laboratorio 03: Introducción a Flutter y Calculadora
+│   ├── calculadora_app/                 # App Flutter (Ejercicios 1-3 y Calculadora Reactiva)
+│   ├── capturas_*.png                   # Evidencias visuales de ejecución
+│   ├── informe_laboratorio_03.tex       # Informe formal en LaTeX (UNSAAC)
+│   ├── P_03_Flutter_AndroidStudio.pdf   # Guía de laboratorio oficial
+│   └── README.md                        # Documentación detallada del Laboratorio 03
+│
+├── lab_04/                              # Laboratorio 04: Catálogo y Sandbox de 25 Widgets
+│   ├── widgets_app/                     # App Flutter con catálogo interactivo y sandbox
+│   ├── imagenes/                        # Capturas categorizadas (Layout, Display, Input, etc.)
+│   ├── informe_laboratorio_04.tex       # Informe formal en LaTeX (UNSAAC)
+│   └── README.md                        # Documentación detallada del Laboratorio 04
+│
+├── lab_05/                              # Laboratorio 05: Manejo de Eventos y Gestos en Flutter
+│   ├── events_app/                      # App Flutter interactiva (Básicos, Intermedios, Avanzados)
+│   ├── ej1.png ... ej9.png              # Capturas de ejecución en emulador
+│   ├── informe_laboratorio_05.tex       # Informe formal en LaTeX (UNSAAC)
+│   ├── PRÁCTICA 05_ eventos_flutter.pdf # Guía de laboratorio oficial
+│   └── README.md                        # Documentación detallada del Laboratorio 05
+│
+├── lab_06/                              # Laboratorio 06: Diseño Responsivo y Accesible en Flutter
+│   ├── responsive_app/                  # App Flutter (LayoutBuilder, Grilla adaptativa, WCAG AA, Semantics, Checklist)
+│   ├── ej1.png ... ej5.png              # Evidencias visuales de los 5 módulos
+│   ├── informe_laboratorio_06.tex       # Informe formal en LaTeX con carátula oficial UNSAAC
+│   ├── unsaac.jpg                       # Logo institucional para compilación
+│   ├── Guia06-flutter_*.pdf             # Guía oficial de cátedra
+│   └── README.md                        # Documentación técnica completa y checklist de lanzamiento
+│
+├── cusco_reporta/                       # Proyecto Semestral: Plataforma de Reportes Urbanos
+│   ├── frontend/                        # Cliente web interactivo (React + Vite)
+│   ├── backend/                         # API RESTful (Node.js + Express)
+│   ├── database/                        # Scripts SQL y esquemas relacionales
+│   ├── PROTOTIPO.html                   # Mockup interactivo
+│   └── README.md                        # Documentación de instalación y arquitectura
+│
+├── docs/                                # Documentación General y Respaldo Institucional
+│   ├── propuesta_proyecto_cusco_reporta.tex # Propuesta formal del proyecto de software
+│   ├── archivos_antiguos/               # Informes de respaldo de cursos previos
+│   └── unsaac.jpg                       # Logo oficial institucional de alta resolución
+│
+├── analysis_options.yaml                # Reglas globales de análisis estático Dart/Flutter
+└── .gitignore                           # Filtro de archivos no rastreados y temporales
 ```
+
+---
+
+## 📊 Matriz de Laboratorios y Proyectos
+
+| Módulo | Descripción / Contenido | Tecnologías | Pruebas Automatizadas | Estado |
+| :--- | :--- | :--- | :---: | :---: |
+| **Lab 01** | Instalación del entorno, arquitectura de widgets y app "Hola Mundo Móvil" | Flutter, Dart | Widget Smoke Test (100% OK) | ✅ Concluido |
+| **Lab 02** | Algoritmos y tipos de datos: `List`, `Map`, `Set`, análisis de complejidad | Dart, DartPad | 11 Tests Unitarios (100% OK) | ✅ Concluido |
+| **Lab 03** | Layouts, StatefulWidget y Calculadora interactiva con color dinámico | Flutter, Dart | 12 Tests Unitarios (100% OK) | ✅ Concluido |
+| **Lab 04** | Catálogo exhaustivo y sandbox en vivo de 25 widgets esenciales | Flutter, Dart | 6 Tests Automatizados (100% OK) | ✅ Concluido |
+| **Lab 05** | Eventos táctiles, gestos (`GestureDetector`), controladores y animaciones | Flutter, Dart | 10 Tests Unitarios (100% OK) | ✅ Concluido |
+| **Lab 06** | Diseño responsivo, breakpoints adaptativos, accesibilidad WCAG AA, semántica y checklist de 20 criterios | Flutter, Dart, Material 3 | 9 Tests Unitarios/Widgets (100% OK) | ✅ Concluido |
+| **Proyecto**| "Cusco Reporta": Plataforma ciudadana para reporte y gestión de incidencias | React, Node.js, SQL | Verificación Funcional | 🚀 En Desarrollo |
+
+---
+
+## 🚀 Guía Rápida de Ejecución
+
+### Ejecutar Pruebas Automatizadas por Laboratorio
+
+Cada laboratorio dispone de su propio entorno de pruebas. Para ejecutarlas:
+
+```bash
+# Laboratorio 01 (Smoke Test)
+cd lab_01/hola_mundo
+flutter test
+
+# Laboratorio 02 (Pruebas Unitarias de Algoritmos)
+cd ../../lab_02
+flutter test
+
+# Laboratorio 03 (Pruebas de Lógica de Calculadora)
+cd ../lab_03/calculadora_app
+flutter test test/calculadora_test.dart
+
+# Laboratorio 04 (Pruebas de Widgets y Navegación)
+cd ../../lab_04/widgets_app
+flutter test
+
+# Laboratorio 05 (Pruebas de Eventos y Formularios)
+cd ../../lab_05/events_app
+flutter test
+
+# Laboratorio 06 (Pruebas de Responsividad, Breakpoints y Accesibilidad)
+cd ../../lab_06/responsive_app
+flutter test
+```
+
+### Ejecutar Aplicaciones Flutter en Escritorio (Windows)
+
+```bash
+cd lab_06/responsive_app # o cualquier otra app
+flutter run -d windows
+```
+
+### Compilar Informes en LaTeX
+
+Todos los informes se encuentran en sus respectivas subcarpetas y pueden compilarse con cualquier distribución de LaTeX (`pdflatex` o `xelatex`):
+
+```bash
+cd lab_06
+pdflatex informe_laboratorio_06.tex
+```
+
